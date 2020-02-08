@@ -86,7 +86,7 @@ class ArticleController extends Controller
      *                     type="string",
      *                 ),
      *                 @OA\Property(
-     *                     property="text",
+     *                     property="body",
      *                     description="Article text",
      *                     type="string"
      *                 )
@@ -97,7 +97,10 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        return Article::create($request->all());
+        $data = $request->all();
+        $data['user_id'] = auth()->id();
+
+        return Article::create($data);
     }
 
     /**
@@ -111,6 +114,10 @@ class ArticleController extends Controller
      *         in="path",
      *         description="article id",
      *         required=true
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Article data"
      *     ),
      *     @OA\Response(
      *         response=405,
@@ -128,7 +135,7 @@ class ArticleController extends Controller
      *                     type="string",
      *                 ),
      *                 @OA\Property(
-     *                     property="text",
+     *                     property="body",
      *                     description="Article text",
      *                     type="string"
      *                 )
@@ -139,8 +146,10 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $data = $request->all();
+        $data['user_id'] = auth()->id();
         $article = Article::findOrFail($id);
-        $article->update($request->all());
+        $article->update($data);
 
         return $article;
     }

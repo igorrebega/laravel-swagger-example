@@ -98,7 +98,7 @@
                                         "description": "Article title",
                                         "type": "string"
                                     },
-                                    "text": {
+                                    "body": {
                                         "description": "Article text",
                                         "type": "string"
                                     }
@@ -154,7 +154,7 @@
                 "tags": [
                     "articles"
                 ],
-                "summary": "Create article",
+                "summary": "Update article",
                 "operationId": "App\\Http\\Controllers\\ArticleController::update",
                 "parameters": [
                     {
@@ -174,7 +174,7 @@
                                         "description": "Article title",
                                         "type": "string"
                                     },
-                                    "text": {
+                                    "body": {
                                         "description": "Article text",
                                         "type": "string"
                                     }
