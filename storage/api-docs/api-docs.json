@@ -1,0 +1,262 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Pet API",
+        "description": "Pet API example",
+        "contact": {
+            "email": "igorrebega@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://swagger.test/api",
+            "description": "Host"
+        }
+    ],
+    "paths": {
+        "/projects/{id}": {
+            "get": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Get project information",
+                "description": "Returns project data",
+                "operationId": "getProjectById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Project id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "oauth2_security_example": [
+                            "write:projects",
+                            "read:projects"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/articles": {
+            "get": {
+                "tags": [
+                    "articles"
+                ],
+                "summary": "List of all articles",
+                "description": "List of all articles",
+                "operationId": "App\\Http\\Controllers\\ArticleController::index",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Article"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "articles"
+                ],
+                "summary": "Create article",
+                "operationId": "App\\Http\\Controllers\\ArticleController::store",
+                "requestBody": {
+                    "description": "Input data format",
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "description": "Article title",
+                                        "type": "string"
+                                    },
+                                    "text": {
+                                        "description": "Article text",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    "passport"
+                ]
+            }
+        },
+        "/articles/{id}": {
+            "get": {
+                "tags": [
+                    "articles"
+                ],
+                "summary": "Article",
+                "description": "Info about article",
+                "operationId": "App\\Http\\Controllers\\ArticleController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "article id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Article"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Article was not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "articles"
+                ],
+                "summary": "Create article",
+                "operationId": "App\\Http\\Controllers\\ArticleController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "article id",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Input data format",
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "description": "Article title",
+                                        "type": "string"
+                                    },
+                                    "text": {
+                                        "description": "Article text",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    "passport"
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "articles"
+                ],
+                "summary": "Remove article",
+                "operationId": "App\\Http\\Controllers\\ArticleController::delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "article id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Removed successfully"
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    "passport"
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Article": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "body": {
+                        "type": "string",
+                        "nullable": "true"
+                    },
+                    "user_id": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "passport": {
+                "type": "oauth2",
+                "description": "Laravel passport oauth2 security.",
+                "in": "header",
+                "scheme": "https",
+                "flows": {
+                    "password": {
+                        "authorizationUrl": "http://swagger.test/oauth/authorize",
+                        "tokenUrl": "http://swagger.test/oauth/token",
+                        "refreshUrl": "http://swagger.test/token/refresh",
+                        "scopes": []
+                    }
+                }
+            }
+        }
+    }
+}
