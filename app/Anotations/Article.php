@@ -19,7 +19,7 @@ class Article
     public $title;
 
     /**
-     * @OA\Property(type="string",nullable="true")
+     * @OA\Property(type="string",nullable=true)
      */
     public $body;
 

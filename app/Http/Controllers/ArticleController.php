@@ -27,7 +27,7 @@ class ArticleController extends Controller
      *     ),
      *     @OA\Response(
      *         response=400,
-     *         description="Invalid status value"
+     *         description="Invalid status"
      *     )
      * )
      */
@@ -70,6 +70,10 @@ class ArticleController extends Controller
      *     tags={"articles"},
      *     summary="Create article",
      *     security={"passport"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Article data"
+     *     ),
      *     @OA\Response(
      *         response=405,
      *         description="Invalid input"
@@ -152,7 +156,7 @@ class ArticleController extends Controller
      *         required=true
      *     ),
      *     @OA\Response(
-     *         response=204,
+     *         response=200,
      *         description="Removed successfully"
      *     ),
      *     @OA\Response(
@@ -166,6 +170,6 @@ class ArticleController extends Controller
         $article = Article::findOrFail($id);
         $article->delete();
 
-        return 204;
+        return ['success' => 1];
     }
 }
