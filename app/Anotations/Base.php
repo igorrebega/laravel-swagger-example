@@ -5,8 +5,8 @@ namespace App\Annotations;
 /**
  * @OA\Info(
  *      version="1.0.0",
- *      title="Pet API",
- *      description="Pet API example",
+ *      title="Blog API",
+ *      description="Blog API example",
  *      @OA\Contact(
  *          email="igorrebega@gmail.com"
  *      )
