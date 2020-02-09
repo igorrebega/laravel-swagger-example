@@ -79,8 +79,15 @@ class ArticleController extends Controller
      *         description="Invalid input"
      *     ),
      *     @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/ArticleRequest")
+     *          required=true,
+     *          @OA\MediaType(
+     *             mediaType="application/x-www-form-urlencoded",
+     *             @OA\JsonContent(ref="#/components/schemas/ArticleRequest")
+     *          ),
+     *          @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\JsonContent(ref="#/components/schemas/ArticleRequest")
+     *          )
      *     )
      * )
      */
